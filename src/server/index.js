@@ -1,9 +1,8 @@
 var path = require('path')
-const dotenv = require('dotenv');
-const FormData = require('form-data')
-const fetch = require('node-fetch')
+const dotenv = require('dotenv')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
+const unirest = require('unirest')
 
 dotenv.config();
 
@@ -18,6 +17,16 @@ app.listen(PORT, function () {
     console.log(`Example app listening on port ${PORT}!`)
 })
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', '*')
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+        return res.json({})
+    }
+    next()
+})
+
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
@@ -27,18 +36,18 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
-app.post('/analyze', (req, res) => {
-    var data = new FormData()
-    data.append('url', req.body.url)
-    data.append('key', process.env.API_KEY)
-    data.append('lang', "auto")
+app.post('/analyse', (req, res) => {
+    console.log(req.body)
 
-    fetch("https://api.meaningcloud.com/sentiment-2.1", {
-        method: 'post',
-        body: data
-    })
+    unirest.post("https://api.meaningcloud.com/sentiment-2.1")
+        .headers({ 'Content-Type': 'multipart/form-data' })
+        .field('url', req.body.url)
+        .field('key', process.env.API_KEY)
+        .field('lang', 'auto')
+
         .then(result => {
-            res.json(result)
+            console.log(result.status)
+            res.json(result.body)
         })
         .catch(error => {
             console.error(error);
