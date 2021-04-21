@@ -31,12 +31,30 @@ input {
     border-radius: 0;
     background-color: #616161;
     color: white;
+    padding: 1em;
+}
+
+.button-light {
+    color: black;
+    background-color: #ffcc80;
 }
 
 .card-primary-light {
-    background-color: #ffffb0;
-    border-radius: 15px;
+    background-color: #373737;
+    border-radius: 5px;
     padding: 2em;
+    color: white;
+}
+
+#error {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#error.active {
+    visibility: visible;
+    opacity: 100%;
+    transition: 1s;
 }
 
 #results-div {
@@ -49,4 +67,5 @@ input {
 #results-div.active {
     opacity: 100%;
     transition: 1s;
+    pointer-events: inherit;
 }

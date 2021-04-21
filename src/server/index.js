@@ -51,6 +51,7 @@ app.post('/analyse', (req, res) => {
         })
         .catch(error => {
             console.error(error);
+            
             res.status(500).json({error: "Something went wrong"})
         })
 })

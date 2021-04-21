@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Test</title>
+        <title>NLP Eval</title>
     </head>
 
     <body>
-
         <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
+            <div class="logo">
+                NLP Eval
             </div>
         </header>
 
@@ -20,12 +16,16 @@
             <section>
                 <form id="form" class="" onsubmit="return handleSubmit(event)">
                     <input id="url" type="text" name="input" value="" placeholder="Enter an article's url">
-                    <input class="button" id="submit" type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                    <input class="button button-light" id="submit" type="submit" name="" value="Submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
                 </form>
+                <p id="error">Invalid url</p>
                 <div id="results-div">
                     <div class="card-primary-light">
-                        <strong id="results-title" class="">Form Results:</strong>
+                        <h1 id="results-title">Analysis Results</h1>
+                        <br/>
                         <div id="results"></div>
+                        <br/>
+                        <button id="back" class="button button-light">Back</a>
                     </div>
                 </div>
             </section>
@@ -34,6 +34,5 @@
         <footer>
             <p>This is a footer</p>
         </footer>
-
     </body>
 </html>
