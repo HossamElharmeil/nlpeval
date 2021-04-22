@@ -4,7 +4,6 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     entry: './src/client/index.js',
@@ -15,7 +14,7 @@ module.exports = {
         rules: [
             {
                 test: /\.scss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -24,7 +23,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new MiniCssExtractPlugin(),
         new FaviconsWebpackPlugin('./src/client/assets/logo.png'),
         new WorkboxPlugin.GenerateSW({
             clientsClaim: true,

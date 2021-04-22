@@ -1,14 +1,13 @@
 import { checkForUrl } from '../urlChecker'
 
-const fetchData = async (url) => {
-    const res = await fetch('http://localhost:8081/analyse', {
+const fetchData = (url) => {
+    return fetch('http://localhost:8081/analyse', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ url: url })
-    })
-    return await res.json()
+    }).then(res => res.json())
 }
 
 const showData = (data) => {
